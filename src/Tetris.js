@@ -1,14 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ROWS, COLUMNS, TETROMINOS, COLORS } from "./Constant";
-import { FaRegCirclePlay } from "react-icons/fa6";
-import { FaRegPauseCircle } from "react-icons/fa";
-import { GrPowerReset } from "react-icons/gr";
-import { GrResume } from "react-icons/gr";
-import { FaLeftLong } from "react-icons/fa6";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { FaLongArrowAltUp } from "react-icons/fa";
-import { FaLongArrowAltDown } from "react-icons/fa";
+import { FaRegCirclePlay, FaArrowRightLong, FaLeftLong } from "react-icons/fa6";
+import { FaRegPauseCircle, FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
+import { GrPowerReset, GrResume } from "react-icons/gr";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { MdOutlineClose } from "react-icons/md";
 function Tetris() {
