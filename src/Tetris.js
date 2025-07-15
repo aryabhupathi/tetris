@@ -2,7 +2,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { ROWS, COLUMNS, TETROMINOS, COLORS } from "./Constant";
 import { FaRegCirclePlay, FaArrowRightLong, FaLeftLong } from "react-icons/fa6";
-import { FaRegPauseCircle, FaLongArrowAltUp, FaLongArrowAltDown } from "react-icons/fa";
+import {
+  FaRegPauseCircle,
+  FaLongArrowAltUp,
+  FaLongArrowAltDown,
+} from "react-icons/fa";
 import { GrPowerReset, GrResume } from "react-icons/gr";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { MdOutlineClose } from "react-icons/md";
@@ -279,7 +283,6 @@ function Tetris() {
                 ))}
               </div>
             ))}
-            {isGameOver && <h2>Game Over</h2>}
           </div>
           <div className="grid1">
             <button
@@ -321,18 +324,11 @@ function Tetris() {
               >
                 Recent Scores
               </button>
-              <ul>
-                {recentScores.length === 0 && <li>No scores yet</li>}
-                {recentScores.map((s, i) => (
-                  <li key={i}>
-                    Score {i + 1}: {s}
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
       </div>
+      {isGameOver && <h2>Game Over</h2>}
       <div className="controls">
         {currentPiece === null ? (
           <button onClick={startGame}>
