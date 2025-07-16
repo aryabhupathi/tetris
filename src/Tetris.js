@@ -26,7 +26,7 @@ function Tetris() {
   const [gameStarted, setGameStarted] = useState(false);
   const intervalRef = useRef(null);
   const moveDown = useCallback(() => {
-    if (!currentPiece) return;
+    if (!currentPiece || isGameOver) return;
     const newY = currentPiece.y + 1;
     if (!collision(currentPiece.shape, currentPiece.x, newY)) {
       setCurrentPiece((prev) => ({ ...prev, y: newY }));
@@ -37,8 +37,10 @@ function Tetris() {
       setScore((s) => s + linesCleared * 10);
       setLevel((l) => l + Math.floor(linesCleared / 10));
       if (currentPiece.y === 0) {
-        setIsGameOver(true);
-        setRecentScores((prev) => [score, ...prev].slice(0, 5));
+        if (!isGameOver) {
+          setIsGameOver(true);
+          setRecentScores((prev) => [score, ...prev].slice(0, 5));
+        }
         return;
       }
       setCurrentPiece(nextPiece);
@@ -338,13 +340,10 @@ function Tetris() {
       {isGameOver && (
         <div className="modal-overlay" onClick={() => setIsGameOver(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="modal-close"
-              onClick={() => setIsGameOver(false)}
-            >
+            <button className="modal-close" onClick={resetGame}>
               <MdOutlineClose />
             </button>
-            \<h2>Game Over</h2>
+            <h2>Game Over</h2>
             <p>Your Score: {score}</p>
             <button onClick={resetGame}>Play Again</button>
           </div>
@@ -357,13 +356,15 @@ function Tetris() {
           </button>
         ) : (
           <>
-            <button onClick={() => (isPaused ? resumeGame() : pauseGame())}>
-              {isPaused ? (
-                <GrResume className="control-icon resume" />
-              ) : (
-                <FaRegPauseCircle className="control-icon pause" />
-              )}
-            </button>
+            {!isGameOver && (
+              <button onClick={() => (isPaused ? resumeGame() : pauseGame())}>
+                {isPaused ? (
+                  <GrResume className="control-icon resume" />
+                ) : (
+                  <FaRegPauseCircle className="control-icon pause" />
+                )}
+              </button>
+            )}
             <button onClick={resetGame}>
               <GrPowerReset className="control-icon reset" />
             </button>
