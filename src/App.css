@@ -97,7 +97,7 @@ h2 {
   margin-top: 1rem;
   font-size: 0.9rem;
 }
-.recent-scores ul {
+.recent-scores ul ol{
   list-style: none;
   padding-left: 0;
   margin-top: 0.5rem;
@@ -196,7 +196,7 @@ h2 {
   background: #00ffff;
   color: #000;
   border: none;
-  padding: 8px 16px;
+  padding: 5px 10px;
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;

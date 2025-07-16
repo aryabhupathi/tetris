@@ -46,6 +46,15 @@ function Tetris() {
     }
   }, [board, currentPiece, nextPiece]);
   useEffect(() => {
+    const savedScores = JSON.parse(
+      localStorage.getItem("recentScores") || "[]"
+    );
+    setRecentScores(savedScores);
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("recentScores", JSON.stringify(recentScores));
+  }, [recentScores]);
+  useEffect(() => {
     if (!isPaused && !isGameOver) {
       clearInterval(intervalRef.current);
       intervalRef.current = setInterval(
@@ -100,7 +109,6 @@ function Tetris() {
       setScore(0);
       setLevel(1);
       setClearedLines([]);
-      setRecentScores([]);
       setIsPaused(false);
       setIsGameOver(false);
       setGameStarted(true);
@@ -256,7 +264,6 @@ function Tetris() {
     setBoard(createEmptyBoard());
     setCurrentPiece(null);
     setNextPiece(randomPiece());
-    setScore(0);
     setLevel(1);
     setClearedLines([]);
     setIsPaused(false);
@@ -328,7 +335,21 @@ function Tetris() {
           </div>
         </div>
       </div>
-      {isGameOver && <h2>Game Over</h2>}
+      {isGameOver && (
+        <div className="modal-overlay" onClick={() => setIsGameOver(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="modal-close"
+              onClick={() => setIsGameOver(false)}
+            >
+              <MdOutlineClose />
+            </button>
+            \<h2>Game Over</h2>
+            <p>Your Score: {score}</p>
+            <button onClick={resetGame}>Play Again</button>
+          </div>
+        </div>
+      )}
       <div className="controls">
         {currentPiece === null ? (
           <button onClick={startGame}>
@@ -374,31 +395,10 @@ function Tetris() {
               <li>Space: Pause/Resume</li>
               <li>Fill rows to clear them and score!</li>
             </ul>
-            <button onClick={() => setShowHowToPlay(false)}>
-              <MdOutlineClose />
-            </button>
-          </div>
-        </div>
-      )}
-      {showRecentScores && (
-        <div
-          className="modal-overlay"
-          onClick={() => setShowRecentScores(false)}
-        >
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>Recent Scores</h2>
-            <ul>
-              {recentScores.length === 0 ? (
-                <li>No scores yet</li>
-              ) : (
-                recentScores.map((s, i) => (
-                  <li key={i}>
-                    Score {i + 1}: {s}
-                  </li>
-                ))
-              )}
-            </ul>
-            <button onClick={() => setShowRecentScores(false)}>
+            <button
+              className="modal-close"
+              onClick={() => setShowHowToPlay(false)}
+            >
               <MdOutlineClose />
             </button>
           </div>
