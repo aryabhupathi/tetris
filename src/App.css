@@ -6,12 +6,12 @@
 body {
   background-color: #111;
   color: white;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100%;
-  padding: 2rem;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
 }
 .game {
   text-align: center;
@@ -115,17 +115,13 @@ ol{
   display: flex;
   justify-content: center;
   gap: 1rem;
+  background: linear-gradient(#0f0c29, #302b63, #24243e);
 }
 .controls button {
   box-shadow: rgba(0, 229, 255, 0.5) 0px 0px 10px;
   color: rgb(0, 0, 0);
   cursor: pointer;
   font-size: 1em;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 0, 51, 0.4),
-    rgba(0, 179, 204, 0.4)
-  );
   border-width: initial;
   border-style: none;
   border-color: initial;
@@ -196,8 +192,7 @@ ol{
 }
 .modal button {
   margin-top: 20px;
-  background: #00ffff;
-  color: #000;
+  color: red;
   border: none;
   padding: 5px 10px;
   font-weight: bold;
@@ -205,12 +200,9 @@ ol{
   cursor: pointer;
   transition: 0.2s ease;
 }
-.modal button:hover {
-  background: #00cccc;
-}
 .modal-close {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 10px;
   background: none;
   border: none;

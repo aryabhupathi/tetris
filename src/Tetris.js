@@ -295,10 +295,10 @@ function Tetris() {
           </div>
           <div className="grid1">
             <button
-              className="action-button"
+              className="action-button" style={{display:"flex", justifyContent:"center"}}
               onClick={() => setShowHowToPlay(true)}
             >
-              How to play <BsFillInfoCircleFill />
+              How to play
             </button>
             <div>
               {gameStarted && (
